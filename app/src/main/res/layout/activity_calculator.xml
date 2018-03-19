@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.percent.PercentRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,8 +13,11 @@
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_above="@+id/xx"
-        android:textColor="#D1D1D1"
-        app:layout_heightPercent="10%" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textSize="62sp"
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="85%" />
 
     <Button
         android:id="@+id/num0"
@@ -39,35 +43,10 @@
         app:layout_widthPercent="25%" />
 
     <Button
-        android:id="@+id/point"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightof="@id/num00"
-        android:layout_toStartOf="@+id/equal"
+        android:id="@+id/num1"
+        android:layout_above="@+id/num0"
         android:background="@drawable/buttonstyle"
-        android:text="."
-        android:textColor="#D1D1D1"
-        android:textSize="24sp"
-        app:layout_heightPercent="10%"
-        app:layout_widthPercent="25%" />
-
-    <Button
-        android:id="@+id/equal"
-        android:text="="
-        android:textSize="24sp"
-        app:layout_heightPercent="20%"
-        app:layout_widthPercent="25%"
-        android:textColor="#D1D1D1"
-        android:background="@drawable/buttonstyle"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        />
-
-    <Button
-        android:id="@+id/num3"
-        android:layout_above="@+id/point"
-        android:layout_toEndOf="@+id/num2"
-        android:background="@drawable/buttonstyle"
-        android:text="3"
+        android:text="1"
         android:textColor="#D1D1D1"
         android:textSize="24sp"
         app:layout_heightPercent="10%"
@@ -85,14 +64,27 @@
         app:layout_widthPercent="25%" />
 
     <Button
-        android:id="@+id/num1"
-        android:layout_above="@+id/num0"
+        android:id="@+id/num3"
+        android:layout_above="@+id/point"
+        android:layout_toEndOf="@+id/num2"
         android:background="@drawable/buttonstyle"
-        android:text="1"
+        android:text="3"
         android:textColor="#D1D1D1"
         android:textSize="24sp"
         app:layout_heightPercent="10%"
         app:layout_widthPercent="25%" />
+
+
+    <Button
+        android:id="@+id/num4"
+        android:layout_above="@+id/num1"
+        android:background="@drawable/buttonstyle"
+        android:text="4"
+        android:textColor="#D1D1D1"
+        android:textSize="24sp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%"
+        />
 
     <Button
         android:id="@+id/num5"
@@ -117,8 +109,40 @@
         app:layout_widthPercent="25%" />
 
     <Button
+        android:id="@+id/num7"
+        android:layout_above="@+id/num4"
+        android:background="@drawable/buttonstyle"
+        android:text="7"
+        android:textColor="#D1D1D1"
+        android:textSize="24sp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%" />
+
+    <Button
+        android:id="@+id/num8"
+        android:layout_above="@+id/num5"
+        android:layout_toEndOf="@+id/num7"
+        android:background="@drawable/buttonstyle"
+        android:text="8"
+        android:textColor="#D1D1D1"
+        android:textSize="24sp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%" />
+
+    <Button
+        android:id="@+id/num9"
+        android:layout_above="@+id/num6"
+        android:layout_toEndOf="@+id/num8"
+        android:background="@drawable/buttonstyle"
+        android:text="9"
+        android:textColor="#D1D1D1"
+        android:textSize="24sp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%" />
+
+    <Button
         android:id="@+id/addition"
-        android:layout_above="@+id/equal"
+        android:layout_above="@+id/symbol"
         android:layout_toEndOf="@+id/num6"
         android:background="@drawable/buttonstyle"
         android:text="+"
@@ -218,38 +242,6 @@
         />
 
     <Button
-        android:id="@+id/num7"
-        android:layout_above="@+id/num4"
-        android:background="@drawable/buttonstyle"
-        android:text="7"
-        android:textColor="#D1D1D1"
-        android:textSize="24sp"
-        app:layout_heightPercent="10%"
-        app:layout_widthPercent="25%" />
-
-    <Button
-        android:id="@+id/num8"
-        android:layout_above="@+id/num5"
-        android:layout_toEndOf="@+id/num7"
-        android:background="@drawable/buttonstyle"
-        android:text="8"
-        android:textColor="#D1D1D1"
-        android:textSize="24sp"
-        app:layout_heightPercent="10%"
-        app:layout_widthPercent="25%" />
-
-    <Button
-        android:id="@+id/num9"
-        android:layout_above="@+id/num6"
-        android:layout_toEndOf="@+id/num8"
-        android:background="@drawable/buttonstyle"
-        android:text="9"
-        android:textColor="#D1D1D1"
-        android:textSize="24sp"
-        app:layout_heightPercent="10%"
-        app:layout_widthPercent="25%" />
-
-    <Button
         android:id="@+id/subtraction"
         android:layout_above="@+id/addition"
         android:layout_toEndOf="@+id/num9"
@@ -262,14 +254,40 @@
         />
 
     <Button
-        android:id="@+id/num4"
-        android:layout_above="@+id/num1"
+        android:id="@+id/point"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/num00"
+        android:layout_toStartOf="@+id/equal"
         android:background="@drawable/buttonstyle"
-        android:text="4"
+        android:text="."
         android:textColor="#D1D1D1"
         android:textSize="24sp"
         app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%" />
+
+    <Button
+        android:id="@+id/equal"
+        android:text="="
+        android:textSize="24sp"
+        app:layout_heightPercent="10%"
         app:layout_widthPercent="25%"
+        android:textColor="#D1D1D1"
+        android:background="@drawable/buttonstyle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         />
+
+    <Button
+        android:id="@+id/symbol"
+        android:text="+/-"
+        android:textSize="24sp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%"
+        android:textColor="#D1D1D1"
+        android:background="@drawable/buttonstyle"
+        android:layout_above="@+id/equal"
+        android:layout_alignParentEnd="true"
+        />
+
 
 </android.support.percent.PercentRelativeLayout>
