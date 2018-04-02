@@ -1,8 +1,11 @@
 package com.example.reese.calculator;
 
+import android.icu.math.BigDecimal;
+import android.icu.text.DecimalFormat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,6 +43,14 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     private Button point = null;
     private Button equal = null;
     private Button symbol = null;
+    private Button second = null;
+    private Button eighth = null;
+    private Button sixteenth = null;
+    private Button centigrade = null;
+    private Button sin = null;
+    private Button cos = null;
+    private Button tan = null;
+    private Button pai = null;
     private TextView input = null;
 
     protected  void onCreate(Bundle savedInstanceState){
@@ -75,6 +86,14 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         point = (Button)findViewById(R.id.point);
         equal = (Button)findViewById(R.id.equal);
         symbol = (Button)findViewById(R.id.symbol);
+        second = (Button)findViewById(R.id.second);
+        eighth = (Button)findViewById(R.id.eighth);
+        sixteenth = (Button)findViewById(R.id.sixteenth);
+        centigrade = (Button)findViewById(R.id.centigrade);
+        sin = (Button)findViewById(R.id.sin);
+        cos = (Button)findViewById(R.id.cos);
+        tan = (Button)findViewById(R.id.tan);
+        pai = (Button)findViewById(R.id.pai);
         input = (TextView)findViewById(R.id.input);
 
         num0.setOnClickListener(this);
@@ -101,6 +120,14 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         point.setOnClickListener(this);
         equal.setOnClickListener(this);
         symbol.setOnClickListener(this);
+        second.setOnClickListener(this);
+        eighth.setOnClickListener(this);
+        sixteenth.setOnClickListener(this);
+        centigrade.setOnClickListener(this);
+        sin.setOnClickListener(this);
+        cos.setOnClickListener(this);
+        tan.setOnClickListener(this);
+        pai.setOnClickListener(this);
 
         n = false;
         Continue = false;
@@ -131,7 +158,10 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             case R.id.num7:text = text+"7";Continue = false;input.setText(text);break;
             case R.id.num8:text = text+"8";Continue = false;input.setText(text);break;
             case R.id.num9:text = text+"9";Continue = false;input.setText(text);break;
-            case R.id.point:{
+
+        }
+        switch(v.getId()){
+            case R.id.point:{       //输入小数点
                 if(!n){
                     n=false;
                     Continue=false;
@@ -143,11 +173,283 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                     input.setText(text);
                     break;
                 }
+                n=false;
+            }
+            case R.id.C:text="";n1=0;n2=0;n=false;input.setText("0");break; //清空
+            case R.id.delete:  //删除一位，字符串长度大于0时才截取字符,如果长度为1，则直接把字符串设置为0
+                if (text.equals("")){
+                    text = "0";
+                }
+                else if(text.length() > 0){
+                    if(text.length() == 1) {
+                        text = "0";
+                    }
+                    else {
+                        text = text.substring(0,text.length()-1);
+                        input.setText(text);
+                    }
+                }
+                n=false;
+                break;
+            case R.id.percent:{     //百分号
+                if(!text.equals("")) {
+                    String num_s;
+                    Double temp;
+                    if (text.equals("") && Continue) {
+                        n1 = n1 / 100;
+                        num_s = Double.toString(n1);
+                        temp = n1;
+                    } else {
+                        temp = Double.parseDouble(text) / 100;
+                        num_s = Double.toString(temp);
+                        text = num_s;
+                    }
+                    if (num_s.length() > 8) {
+                        input.setText(new DecimalFormat("#.###E##" +
+                                "").format(temp));
+                    } else
+                        input.setText(num_s);
+                }
+                n=false;
+                break;
+            }
+            case R.id.division: {       //除法
+                flag=1;
+                if(!Continue&&flag==1&&!text.equals("")) {
+                    n1 = Double.parseDouble(text);
+                    text = "";
+                }
+                n=false;
+                break;
+            }
+            case R.id.multiplication: {     //乘法
+                flag=2;
+                if(!Continue&&flag==2&&!text.equals("")) {
+                    n1 = Double.parseDouble(text);
+                    text = "";
+                }
+                n=false;
+                break;
+            }
+            case R.id.subtraction: {        //减法
+                flag=3;
+                if(!Continue&&flag==3&&!text.equals("")) {
+                    n1 = Double.parseDouble(text);
+                    text = "";
+                }
+                n=false;
+                break;
+            }
+            case R.id.addition: {       //加法
+                flag=4;
+                if(!Continue&&flag==4&&!text.equals("")) {
+                    n1 = Double.parseDouble(text);
+                    text = "";
+                }
+                n=false;
+                break;
+            }
+            case R.id.xx: {         //x的y次方
+                flag=5;
+                if(!Continue&&flag==5&&!text.equals("")) {
+                    n1 = Double.parseDouble(text);
+                    text = "";
+                }
+                n=false;
+                break;
+            }
+            case R.id.genhao: {     //根号x
+                flag=6;
+                if(!Continue&&flag==6&&!text.equals("")) {
+                    n1 = Double.parseDouble(text);
+                    text = "";
+                }
+                n=false;
+                break;
+            }
+            case R.id.x1: {         //x取倒数
+                flag=7;
+                if(!Continue&&flag==7&&!text.equals("")) {
+                    n1 = Double.parseDouble(text);
+                    n2=1;
+                    text = "";
+                }
+                n=false;
+                break;
+            }
+            case R.id.symbol: {         //正负号
+                if(!text.equals(""))
+                    if(!Continue) {
+                        int len = text.length();
+                        n1 = Double.parseDouble(text);
+                        n1 = 0 - n1;
+                        text = Double.toString(n1);
+                        if ((Math.floor(n1) - n1) == 0 && text.length() == len) {
+                            BigDecimal R_num = new BigDecimal(text);
+                            text="";
+                            text = R_num.setScale(0, BigDecimal.ROUND_UP).toString();
+                        }
+                        input.setText(text);
+                    }
+                    else{
+                        n1=0-n1;
+                        String num_S = Double.toString(n1);
+                        if(num_S.length()>11)
+                            input.setText(new DecimalFormat("#.###E##").format(n1));
+                        else {
+                            if ((Math.floor(n1) - n1) == 0) {
+                                BigDecimal R_num = new BigDecimal(num_S);
+                                num_S = R_num.setScale(0, BigDecimal.ROUND_UP).toString();
+                                input.setText(num_S);
+                            } else {
+                                input.setText(num_S);
+                            }
+                        }
+                    }
+                break;
+            }
+            case R.id.second: {         //十进制转换为二进制
+                if (text.equals("")){
+                    text = "0";
+                }
+                else {
+                    input.setText(Integer.toBinaryString((int)Double.parseDouble(text)));
+                }
+                n=false;
+                break;
+            }
+            case R.id.eighth: {         //十进制转换为八进制
+                if (text.equals("")){
+                    text = "0";
+                }
+                else {
+                    input.setText(Integer.toOctalString((int)Double.parseDouble(text)));
+                }
+                n=false;
+                break;
+            }
+            case R.id.sixteenth: {      //十进制转换为十六进制
+                if (text.equals("")){
+                    text = "0";
+                }
+                else {
+                    input.setText(Integer.toHexString((int)Double.parseDouble(text)));
+                }
+                n=false;
+                break;
+            }
+            case R.id.centigrade: {    //摄氏度转变为华氏度
+                if (text.equals("")){
+                    text = "0";
+                }
+                else {
+                    n1=(Double.parseDouble(text) * 9 / 5) + 32;
+                    String num_S = Double.toString(n1);
+                    input.setText(num_S);
+                }
+                n=false;
+                break;
+            }
+            case R.id.sin: {
+                if (text.equals("")){
+                    text = "0";
+                }
+                else {
+                    n1 = Double.parseDouble(text);
+                    String num_S = Double.toString(Math.sin(Math.toRadians(n1)));
+                    input.setText(num_S);
+                }
+                n=false;
+                break;
+            }
+            case R.id.cos: {
+                if (text.equals("")){
+                    text = "0";
+                }
+                else {
+                    n1 = Double.parseDouble(text);
+                    String num_S = Double.toString(Math.cos(Math.toRadians(n1)));
+                    input.setText(num_S);
+                }
+                n=false;
+                break;
+            }
+            case R.id.tan: {
+                if (text.equals("")) {
+                    text = "0";
+                } else {
+                    n1 = Double.parseDouble(text);
+                    String num_S = Double.toString(Math.tan(Math.toRadians(n1)));
+                    input.setText(num_S);
+                }
+                n = false;
+                break;
+            }
+            case R.id.pai: {
+                if (text.equals("")) {
+                    text = "0";
+                } else {
+                   text = text + "π";
+                   n1 = Math.PI;
+                }
+                n = false;
+                break;
+            }
+                case R.id.equal: {          //等号
+                n = false;
+                if (text.equals(""))
+                    n2 = 0.0;
+                else
+                    n2 = Double.parseDouble(text);
+                if (flag == 1) {
+                    if (n2 != 0.0)
+                        res = n1 / n2;
+                    else {
+                        input.setText("错误");
+                        break;
+                    }
+                } else if (flag == 2) {
+                    res = n1 * n2;
+                } else if (flag == 3) {
+                    res = n1 - n2;
+                } else if (flag == 4) {
+                    res = n1 + n2;
+                } else if (flag == 5) {
+                    res = Math.pow(n1,n2);
+                }else if (flag == 6) {
+                    res = Math.sqrt(n1);
+                }else if (flag == 7) {
+                    if (n1 != 0.0)
+                        res = 1 / n1;
+                    else {
+                        input.setText("错误");
+                        break;
+                    }
+                } else {
+                    if (!text.equals(""))
+                        res = Double.parseDouble(text);
+                }
+                text = "";
+                text = Double.toString(res);
+                if (text.length() > 11) {
+                    input.setText(new DecimalFormat("#.###E##").format(res));
+                } else {
+                    if ((Math.floor(res) - res) != 0) {
+                        input.setText(text);
+                    } else {
+                        BigDecimal R_num = new BigDecimal(text);
+                        text = R_num.setScale(0, BigDecimal.ROUND_UP).toString();
+                        input.setText(text);
+                    }
+                }
+                n1 = res;
+                text = "";
+                Continue = true;
+                flag = 8;
+                break;
             }
 
         }
-
-        
 
     }
 }
