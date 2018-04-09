@@ -158,7 +158,12 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             case R.id.num7:text = text+"7";Continue = false;input.setText(text);break;
             case R.id.num8:text = text+"8";Continue = false;input.setText(text);break;
             case R.id.num9:text = text+"9";Continue = false;input.setText(text);break;
-
+            case R.id.pai:{
+                Continue = false;
+                text = Double.toString(Math.PI);
+                input.setText(text);
+                break;
+            }
         }
         switch(v.getId()){
             case R.id.point:{       //输入小数点
@@ -205,7 +210,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                         text = num_s;
                     }
                     if (num_s.length() > 8) {
-                        input.setText(new DecimalFormat("#.###E##" +
+                        input.setText(new DecimalFormat("#.###E00" +
                                 "").format(temp));
                     } else
                         input.setText(num_s);
@@ -295,7 +300,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                         n1=0-n1;
                         String num_S = Double.toString(n1);
                         if(num_S.length()>11)
-                            input.setText(new DecimalFormat("#.###E##").format(n1));
+                            input.setText(new DecimalFormat("#.###E00").format(n1));
                         else {
                             if ((Math.floor(n1) - n1) == 0) {
                                 BigDecimal R_num = new BigDecimal(num_S);
@@ -385,17 +390,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 n = false;
                 break;
             }
-            case R.id.pai: {
-                if (text.equals("")) {
-                    text = "0";
-                } else {
-                   text = text + "π";
-                   n1 = Math.PI;
-                }
-                n = false;
-                break;
-            }
-                case R.id.equal: {          //等号
+            case R.id.equal: {          //等号
                 n = false;
                 if (text.equals(""))
                     n2 = 0.0;
@@ -432,7 +427,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 text = "";
                 text = Double.toString(res);
                 if (text.length() > 11) {
-                    input.setText(new DecimalFormat("#.###E##").format(res));
+                    input.setText(new DecimalFormat("#.###E00").format(res));
                 } else {
                     if ((Math.floor(res) - res) != 0) {
                         input.setText(text);
